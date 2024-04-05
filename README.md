@@ -13,7 +13,30 @@ gradually which indicates sufficient exploration and the agent has gained the ne
 
 
 ## MONTE CARLO CONTROL ALGORITHM
-Include the steps involved in the Monte Carlo control algorithm
+
+Initialize the state value function V(s) and the policy π(s) arbitrarily.
+
+Generate an episode using π(s) and store the state, action, and reward sequence.
+
+For each state s appearing in the episode:
+
+G ← return following the first occurrence of s
+Append G to Returns(s)
+V(s) ← average(Returns(s))
+For each state s in the episode:
+π(s) ← argmax_a ∑_s' P(s'|s,a)V(s')
+Repeat steps 2-4 until the policy converges.
+
+Use the function decay_schedule to decay the value of epsilon and alpha.
+
+Use the function gen_traj to generate a trajectory.
+
+Use the function tqdm to display the progress bar.
+
+After the policy converges, use the function np.argmax to find the optimal policy. The function takes the following arguments:
+
+Q: The Q-table.
+axis: The axis along which to find the maximum value.
 
 ## MONTE CARLO CONTROL FUNCTION
 ~~~
